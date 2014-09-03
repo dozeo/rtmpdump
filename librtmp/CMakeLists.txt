@@ -40,7 +40,7 @@ if(WIN32)
 endif()
 
 add_library(librtmp ${LIBTYPE} ${srcs} ${public_hdrs} ${hdrs})
-target_link_libraries(librtmp ${OPENSSL_LIBRARIES} ${systemlibs} zlib)
+target_link_libraries(librtmp ${OPENSSL_LIBRARIES} ${systemlibs} ${ZLIB_LIBRARIES})
 
 if(MSVC)
 	list(APPEND definitions _CRT_SECURE_NO_WARNINGS)
@@ -48,7 +48,7 @@ endif()
 
 set_target_properties(librtmp PROPERTIES
 	PUBLIC_HEADERS "${public_hdrs}"
-	INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR};${OPENSSL_INCLUDE_DIR}"
+	INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR};${OPENSSL_INCLUDE_DIR};${ZLIB_INCLUDE_DIR}"
 	COMPILE_DEFINITIONS "${definitions}"
 #	INTERFACE_COMPILE_DEFINITIONS "${interface_definitions}"
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/.."
