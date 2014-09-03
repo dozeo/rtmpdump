@@ -28,6 +28,18 @@
 #include <ws2tcpip.h>
 
 #ifdef _MSC_VER	/* MSVC */
+
+// visual studio 2012 and above defines EWOULDBLOCK (and others) as the BSD equivalent - but they don't match the values of the WSA* versions
+#include <errno.h>
+#undef EWOULDBLOCK
+#undef EAGAIN
+
+#if (_MSC_VER>=1700)
+#define strdup		_strdup
+#define strnicmp	_strnicmp
+#define stricmp		_stricmp
+#endif
+
 #define snprintf _snprintf
 #define strcasecmp stricmp
 #define strncasecmp strnicmp
@@ -38,6 +50,7 @@
 #define SetSockError(e)	WSASetLastError(e)
 #define setsockopt(a,b,c,d,e)	(setsockopt)(a,b,c,(const char *)d,(int)e)
 #define EWOULDBLOCK	WSAETIMEDOUT	/* we don't use nonblocking, but we do use timeouts */
+#define EAGAIN EWOULDBLOCK 
 #define sleep(n)	Sleep(n*1000)
 #define msleep(n)	Sleep(n)
 #define SET_RCVTIMEO(tv,s)	int tv = s*1000

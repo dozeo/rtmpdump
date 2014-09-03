@@ -1,0 +1,6 @@
+[submodule "vendor/wingetopt"]
+	path = vendor/wingetopt
+	url = git@github.com:ksophocleous/wingetopt.git
+[submodule "vendor/zlib"]
+	path = vendor/zlib
+	url = git@github.com:dozeo/zlib.git

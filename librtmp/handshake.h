@@ -703,7 +703,9 @@ HandShake(RTMP * r, int FP9HandShake)
   RC4_handle keyIn = 0;
   RC4_handle keyOut = 0;
 
+#ifndef _DEBUG
   int32_t *ip;
+#endif
   uint32_t uptime;
 
   uint8_t clientbuf[RTMP_SIG_SIZE + 4], *clientsig=clientbuf+4;
