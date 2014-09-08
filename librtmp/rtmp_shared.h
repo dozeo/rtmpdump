@@ -27,7 +27,7 @@
  */
 
 
-#if defined(RTMP_EXPORT_DLL) || defined(RTMP_IMPORT_DLL)
+#if defined(WIN32) && (defined(RTMP_EXPORT_DLL) || defined(RTMP_IMPORT_DLL))
 #  if defined(RTMP_EXPORT_DLL)
 #    define RTMP_EXPORT __declspec(dllexport)
 #  else
