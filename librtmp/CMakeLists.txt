@@ -46,9 +46,20 @@ if(MSVC)
 	list(APPEND definitions _CRT_SECURE_NO_WARNINGS)
 endif()
 
+list(APPEND include_dirs
+	"${CMAKE_CURRENT_SOURCE_DIR}")
+
+list(APPEND include_dirs
+	"${OPENSSL_INCLUDE_DIR}")
+
+if(ZLIB_FOUND)
+	list(APPEND include_dirs
+		"${ZLIB_INCLUDE_DIR}")
+endif()
+
 set_target_properties(librtmp PROPERTIES
 	PUBLIC_HEADERS "${public_hdrs}"
-	INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR};${OPENSSL_INCLUDE_DIR};${ZLIB_INCLUDE_DIR}"
+	INCLUDE_DIRECTORIES "${include_dirs}"
 	COMPILE_DEFINITIONS "${definitions}"
 	INTERFACE_COMPILE_DEFINITIONS "${public_definitions}"
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/.."
