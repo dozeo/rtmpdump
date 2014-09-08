@@ -1080,7 +1080,9 @@ SHandShake(RTMP * r)
   RC4_handle keyOut = 0;
   int FP9HandShake = FALSE;
   int encrypted;
+#ifndef _DEBUG
   int32_t *ip;
+#endif
 
   uint8_t clientsig[RTMP_SIG_SIZE];
   uint8_t serverbuf[RTMP_SIG_SIZE + 4], *serversig = serverbuf+4;

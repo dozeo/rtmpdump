@@ -5,8 +5,6 @@ option(BUILD_LIBRTMP_SHARED "Build librtmp as shared library" ON)
 list(APPEND srcs
 	"amf.c"
 	"hashswf.c"
-#	"librtmp.3"
-#	"librtmp.pc.in"
 	"log.c"
 	"parseurl.c"
 	"rtmp.c"
@@ -27,6 +25,8 @@ list(APPEND hdrs
 
 if(BUILD_LIBRTMP_SHARED)
 	set(LIBTYPE SHARED)
+	list(APPEND definitions "RTMP_EXPORT_DLL")
+	list(APPEND public_definitions RTMP_IMPORT_DLL)
 else()
 	set(LIBTYPE STATIC)
 endif()
@@ -50,6 +50,6 @@ set_target_properties(librtmp PROPERTIES
 	PUBLIC_HEADERS "${public_hdrs}"
 	INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR};${OPENSSL_INCLUDE_DIR}"
 	COMPILE_DEFINITIONS "${definitions}"
-#	INTERFACE_COMPILE_DEFINITIONS "${interface_definitions}"
+	INTERFACE_COMPILE_DEFINITIONS "${public_definitions}"
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/.."
 	)

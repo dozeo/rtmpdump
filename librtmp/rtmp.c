@@ -23,6 +23,10 @@
  *  http://www.gnu.org/copyleft/lgpl.html
  */
 
+#ifdef _MSC_VER
+#pragma warning(disable:4018)
+#endif
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>

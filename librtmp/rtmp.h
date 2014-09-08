@@ -33,6 +33,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#include "rtmp_shared.h"
 #include "amf.h"
 
 #ifdef __cplusplus
@@ -275,15 +276,22 @@ extern "C"
     RTMP_LNK Link;
   } RTMP;
 
+  RTMP_EXPORT
   int RTMP_ParseURL(const char *url, int *protocol, AVal *host,
 		     unsigned int *port, AVal *playpath, AVal *app);
 
+  RTMP_EXPORT
   void RTMP_ParsePlaypath(AVal *in, AVal *out);
+  RTMP_EXPORT
   void RTMP_SetBufferMS(RTMP *r, int size);
+  RTMP_EXPORT
   void RTMP_UpdateBufferMS(RTMP *r);
 
+  RTMP_EXPORT
   int RTMP_SetOpt(RTMP *r, const AVal *opt, AVal *arg);
+  RTMP_EXPORT
   int RTMP_SetupURL(RTMP *r, char *url);
+  RTMP_EXPORT
   void RTMP_SetupStream(RTMP *r, int protocol,
 			AVal *hostname,
 			unsigned int port,
@@ -302,61 +310,100 @@ extern "C"
 			int dStart,
 			int dStop, int bLiveStream, long int timeout);
 
+  RTMP_EXPORT
   int RTMP_Connect(RTMP *r, RTMPPacket *cp);
   struct sockaddr;
+  RTMP_EXPORT
   int RTMP_Connect0(RTMP *r, struct sockaddr *svc);
+  RTMP_EXPORT
   int RTMP_Connect1(RTMP *r, RTMPPacket *cp);
+  RTMP_EXPORT
   int RTMP_Serve(RTMP *r);
 
+  RTMP_EXPORT
   int RTMP_ReadPacket(RTMP *r, RTMPPacket *packet);
+  RTMP_EXPORT
   int RTMP_SendPacket(RTMP *r, RTMPPacket *packet, int queue);
+  RTMP_EXPORT
   int RTMP_SendChunk(RTMP *r, RTMPChunk *chunk);
+  RTMP_EXPORT
   int RTMP_IsConnected(RTMP *r);
+  RTMP_EXPORT
   int RTMP_Socket(RTMP *r);
+  RTMP_EXPORT
   int RTMP_IsTimedout(RTMP *r);
+  RTMP_EXPORT
   double RTMP_GetDuration(RTMP *r);
+  RTMP_EXPORT
   int RTMP_ToggleStream(RTMP *r);
 
+  RTMP_EXPORT
   int RTMP_ConnectStream(RTMP *r, int seekTime);
+  RTMP_EXPORT
   int RTMP_ReconnectStream(RTMP *r, int seekTime);
+  RTMP_EXPORT
   void RTMP_DeleteStream(RTMP *r);
+  RTMP_EXPORT
   int RTMP_GetNextMediaPacket(RTMP *r, RTMPPacket *packet);
+  RTMP_EXPORT
   int RTMP_ClientPacket(RTMP *r, RTMPPacket *packet);
 
+  RTMP_EXPORT
   void RTMP_Init(RTMP *r);
+  RTMP_EXPORT
   void RTMP_Close(RTMP *r);
+  RTMP_EXPORT
   RTMP *RTMP_Alloc(void);
+  RTMP_EXPORT
   void RTMP_Free(RTMP *r);
+  RTMP_EXPORT
   void RTMP_EnableWrite(RTMP *r);
 
+  RTMP_EXPORT
   int RTMP_LibVersion(void);
+  RTMP_EXPORT
   void RTMP_UserInterrupt(void);	/* user typed Ctrl-C */
 
+  RTMP_EXPORT
   int RTMP_SendCtrl(RTMP *r, short nType, unsigned int nObject,
 		     unsigned int nTime);
 
   /* caller probably doesn't know current timestamp, should
    * just use RTMP_Pause instead
    */
+  RTMP_EXPORT
   int RTMP_SendPause(RTMP *r, int DoPause, int dTime);
+  RTMP_EXPORT
   int RTMP_Pause(RTMP *r, int DoPause);
 
+  RTMP_EXPORT
   int RTMP_FindFirstMatchingProperty(AMFObject *obj, const AVal *name,
 				      AMFObjectProperty * p);
 
+  RTMP_EXPORT
   int RTMPSockBuf_Fill(RTMPSockBuf *sb);
+  RTMP_EXPORT
   int RTMPSockBuf_Send(RTMPSockBuf *sb, const char *buf, int len);
+  RTMP_EXPORT
   int RTMPSockBuf_Close(RTMPSockBuf *sb);
 
+  RTMP_EXPORT
   int RTMP_SendCreateStream(RTMP *r);
+  RTMP_EXPORT
   int RTMP_SendSeek(RTMP *r, int dTime);
+  RTMP_EXPORT
   int RTMP_SendServerBW(RTMP *r);
+  RTMP_EXPORT
   int RTMP_SendClientBW(RTMP *r);
+  RTMP_EXPORT
   void RTMP_DropRequest(RTMP *r, int i, int freeit);
+  RTMP_EXPORT
   int RTMP_Read(RTMP *r, char *buf, int size);
+  RTMP_EXPORT
   int RTMP_Write(RTMP *r, const char *buf, int size);
 
 /* hashswf.c */
+  RTMP_EXPORT
   int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
 		   int age);
 

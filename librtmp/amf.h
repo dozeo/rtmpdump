@@ -83,64 +83,71 @@ extern "C"
     int16_t p_UTCoffset;
   } AMFObjectProperty;
 
-  char *AMF_EncodeString(char *output, char *outend, const AVal * str);
-  char *AMF_EncodeNumber(char *output, char *outend, double dVal);
-  char *AMF_EncodeInt16(char *output, char *outend, short nVal);
-  char *AMF_EncodeInt24(char *output, char *outend, int nVal);
-  char *AMF_EncodeInt32(char *output, char *outend, int nVal);
-  char *AMF_EncodeBoolean(char *output, char *outend, int bVal);
+  RTMP_EXPORT char *AMF_EncodeString(char *output, char *outend, const AVal * str);
+  RTMP_EXPORT char *AMF_EncodeNumber(char *output, char *outend, double dVal);
+  RTMP_EXPORT char *AMF_EncodeInt16(char *output, char *outend, short nVal);
+  RTMP_EXPORT char *AMF_EncodeInt24(char *output, char *outend, int nVal);
+  RTMP_EXPORT char *AMF_EncodeInt32(char *output, char *outend, int nVal);
+  RTMP_EXPORT char *AMF_EncodeBoolean(char *output, char *outend, int bVal);
 
   /* Shortcuts for AMFProp_Encode */
-  char *AMF_EncodeNamedString(char *output, char *outend, const AVal * name, const AVal * value);
-  char *AMF_EncodeNamedNumber(char *output, char *outend, const AVal * name, double dVal);
-  char *AMF_EncodeNamedBoolean(char *output, char *outend, const AVal * name, int bVal);
+  RTMP_EXPORT char *AMF_EncodeNamedString(char *output, char *outend, const AVal * name, const AVal * value);
+  RTMP_EXPORT char *AMF_EncodeNamedNumber(char *output, char *outend, const AVal * name, double dVal);
+  RTMP_EXPORT char *AMF_EncodeNamedBoolean(char *output, char *outend, const AVal * name, int bVal);
 
-  unsigned short AMF_DecodeInt16(const char *data);
-  unsigned int AMF_DecodeInt24(const char *data);
-  unsigned int AMF_DecodeInt32(const char *data);
-  void AMF_DecodeString(const char *data, AVal * str);
-  void AMF_DecodeLongString(const char *data, AVal * str);
-  int AMF_DecodeBoolean(const char *data);
-  double AMF_DecodeNumber(const char *data);
+  RTMP_EXPORT unsigned short AMF_DecodeInt16(const char *data);
+  RTMP_EXPORT unsigned int AMF_DecodeInt24(const char *data);
+  RTMP_EXPORT unsigned int AMF_DecodeInt32(const char *data);
+  RTMP_EXPORT void AMF_DecodeString(const char *data, AVal * str);
+  RTMP_EXPORT void AMF_DecodeLongString(const char *data, AVal * str);
+  RTMP_EXPORT int AMF_DecodeBoolean(const char *data);
+  RTMP_EXPORT double AMF_DecodeNumber(const char *data);
 
-  char *AMF_Encode(AMFObject * obj, char *pBuffer, char *pBufEnd);
+  RTMP_EXPORT char *AMF_Encode(AMFObject * obj, char *pBuffer, char *pBufEnd);
+  RTMP_EXPORT 
   int AMF_Decode(AMFObject * obj, const char *pBuffer, int nSize,
 		 int bDecodeName);
+  RTMP_EXPORT 
   int AMF_DecodeArray(AMFObject * obj, const char *pBuffer, int nSize,
 		      int nArrayLen, int bDecodeName);
+  RTMP_EXPORT 
   int AMF3_Decode(AMFObject * obj, const char *pBuffer, int nSize,
 		  int bDecodeName);
-  void AMF_Dump(AMFObject * obj);
-  void AMF_Reset(AMFObject * obj);
 
-  void AMF_AddProp(AMFObject * obj, const AMFObjectProperty * prop);
-  int AMF_CountProp(AMFObject * obj);
+  RTMP_EXPORT void AMF_Dump(AMFObject * obj);
+  RTMP_EXPORT void AMF_Reset(AMFObject * obj);
+
+  RTMP_EXPORT void AMF_AddProp(AMFObject * obj, const AMFObjectProperty * prop);
+  RTMP_EXPORT int AMF_CountProp(AMFObject * obj);
+  RTMP_EXPORT 
   AMFObjectProperty *AMF_GetProp(AMFObject * obj, const AVal * name,
 				 int nIndex);
 
-  AMFDataType AMFProp_GetType(AMFObjectProperty * prop);
-  void AMFProp_SetNumber(AMFObjectProperty * prop, double dval);
-  void AMFProp_SetBoolean(AMFObjectProperty * prop, int bflag);
-  void AMFProp_SetString(AMFObjectProperty * prop, AVal * str);
-  void AMFProp_SetObject(AMFObjectProperty * prop, AMFObject * obj);
+  RTMP_EXPORT AMFDataType AMFProp_GetType(AMFObjectProperty * prop);
+  RTMP_EXPORT void AMFProp_SetNumber(AMFObjectProperty * prop, double dval);
+  RTMP_EXPORT void AMFProp_SetBoolean(AMFObjectProperty * prop, int bflag);
+  RTMP_EXPORT void AMFProp_SetString(AMFObjectProperty * prop, AVal * str);
+  RTMP_EXPORT void AMFProp_SetObject(AMFObjectProperty * prop, AMFObject * obj);
 
-  void AMFProp_GetName(AMFObjectProperty * prop, AVal * name);
-  void AMFProp_SetName(AMFObjectProperty * prop, AVal * name);
-  double AMFProp_GetNumber(AMFObjectProperty * prop);
-  int AMFProp_GetBoolean(AMFObjectProperty * prop);
-  void AMFProp_GetString(AMFObjectProperty * prop, AVal * str);
-  void AMFProp_GetObject(AMFObjectProperty * prop, AMFObject * obj);
+  RTMP_EXPORT void AMFProp_GetName(AMFObjectProperty * prop, AVal * name);
+  RTMP_EXPORT void AMFProp_SetName(AMFObjectProperty * prop, AVal * name);
+  RTMP_EXPORT double AMFProp_GetNumber(AMFObjectProperty * prop);
+  RTMP_EXPORT int AMFProp_GetBoolean(AMFObjectProperty * prop);
+  RTMP_EXPORT void AMFProp_GetString(AMFObjectProperty * prop, AVal * str);
+  RTMP_EXPORT void AMFProp_GetObject(AMFObjectProperty * prop, AMFObject * obj);
 
-  int AMFProp_IsValid(AMFObjectProperty * prop);
+  RTMP_EXPORT int AMFProp_IsValid(AMFObjectProperty * prop);
 
-  char *AMFProp_Encode(AMFObjectProperty * prop, char *pBuffer, char *pBufEnd);
+  RTMP_EXPORT char *AMFProp_Encode(AMFObjectProperty * prop, char *pBuffer, char *pBufEnd);
+  RTMP_EXPORT 
   int AMF3Prop_Decode(AMFObjectProperty * prop, const char *pBuffer,
 		      int nSize, int bDecodeName);
+  RTMP_EXPORT 
   int AMFProp_Decode(AMFObjectProperty * prop, const char *pBuffer,
 		     int nSize, int bDecodeName);
 
-  void AMFProp_Dump(AMFObjectProperty * prop);
-  void AMFProp_Reset(AMFObjectProperty * prop);
+  RTMP_EXPORT void AMFProp_Dump(AMFObjectProperty * prop);
+  RTMP_EXPORT void AMFProp_Reset(AMFObjectProperty * prop);
 
   typedef struct AMF3ClassDef
   {
@@ -151,8 +158,8 @@ extern "C"
     AVal *cd_props;
   } AMF3ClassDef;
 
-  void AMF3CD_AddProp(AMF3ClassDef * cd, AVal * prop);
-  AVal *AMF3CD_GetProp(AMF3ClassDef * cd, int idx);
+  RTMP_EXPORT void AMF3CD_AddProp(AMF3ClassDef * cd, AVal * prop);
+  RTMP_EXPORT AVal *AMF3CD_GetProp(AMF3ClassDef * cd, int idx);
 
 #ifdef __cplusplus
 }
