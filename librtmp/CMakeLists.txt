@@ -1,4 +1,11 @@
-find_package(OpenSSL REQUIRED)
+
+option(BUILD_WITH_OPENSSL "Build librtmp with openssl" ON)
+
+if(BUILD_WITH_OPENSSL)
+	find_package(OpenSSL REQUIRED)
+else()
+	list(APPEND definitions "NO_CRYPTO")
+endif()
 
 option(BUILD_LIBRTMP_SHARED "Build librtmp as shared library" ON)
 
@@ -7,12 +14,13 @@ list(APPEND srcs
 	"hashswf.c"
 	"log.c"
 	"parseurl.c"
-	"rtmp.c"
-)
+	"rtmp.c")
 
 list(APPEND public_hdrs
 	"amf.h"
-	"rtmp.h")
+	"rtmp.h"
+	"rtmp_shared.h"
+	"log.h")
 
 list(APPEND hdrs
 	"bytes.h"
@@ -20,7 +28,6 @@ list(APPEND hdrs
 	"dhgroups.h"
 	"handshake.h"
 	"http.h"
-	"log.h"
 	"rtmp_sys.h")
 
 if(BUILD_LIBRTMP_SHARED)
@@ -58,10 +65,16 @@ if(ZLIB_FOUND)
 endif()
 
 set_target_properties(librtmp PROPERTIES
-	PUBLIC_HEADERS "${public_hdrs}"
+	PUBLIC_HEADER "${public_hdrs}"
 	INCLUDE_DIRECTORIES "${include_dirs}"
 	COMPILE_DEFINITIONS "${definitions}"
 	INTERFACE_COMPILE_DEFINITIONS "${public_definitions}"
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/.."
 	PREFIX ""
 	)
+
+install(TARGETS librtmp
+	LIBRARY DESTINATION lib COMPONENT lib
+	ARCHIVE DESTINATION lib COMPONENT lib
+	RUNTIME DESTINATION bin COMPONENT bin
+	PUBLIC_HEADER DESTINATION include/librtmp COMPONENT dev)
