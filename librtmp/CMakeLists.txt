@@ -71,6 +71,7 @@ set_target_properties(librtmp PROPERTIES
 	INTERFACE_COMPILE_DEFINITIONS "${public_definitions}"
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/.."
 	PREFIX ""
+	IMPORT_PREFIX ""
 	)
 
 install(TARGETS librtmp
